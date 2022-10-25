@@ -1,1 +1,2 @@
-export * from './Portfolio-Item.dto';
+export * from './create-portfolioItem.dto';
+export * from './update-portfolioItem.dto';

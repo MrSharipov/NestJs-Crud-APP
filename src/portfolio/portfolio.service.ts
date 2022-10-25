@@ -1,13 +1,13 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { ItemDto } from './dto';
+import { CreatePortfolioItemDto } from './dto';
 
 @Injectable()
 export class PortfolioService {
     constructor(private prisma: PrismaService){}
 
 // Add item to portfolio
-    async createItem(dto: ItemDto){
+    async createItem(dto: CreatePortfolioItemDto){
         try{
             const portfolioItem = await this.prisma.portfolio.create({
                 data: {
@@ -53,7 +53,7 @@ export class PortfolioService {
     }
 
 //Update by Id
-   async updateItemById(itemId:number, dto:ItemDto){
+   async updateItemById(itemId:number, dto:CreatePortfolioItemDto){
         const pItem = await this.prisma.portfolio.findUnique({
             where: {
                 id: itemId, 
