@@ -8,30 +8,48 @@ export class PortfolioService {
 
 // Add item to portfolio
     async createItem(dto: ItemDto){
-        const portfolioItem = await this.prisma.portfolio.create({
-            data: {
-                title: dto.title,
-                desc: dto.desc
-            }
-        });
+        try{
+            const portfolioItem = await this.prisma.portfolio.create({
+                data: {
+                    title: dto.title,
+                    desc: dto.desc
+                }
+            });
+    
+            return portfolioItem;   
 
-        return portfolioItem;
+        } 
+        
+        catch(err){
+            throw err;
+        }
     }
 
 // Find All
     async findAll(){
-        return this.prisma.portfolio.findMany({})
+        try{ 
+            return this.prisma.portfolio.findMany({})
+        }
+        catch(err) {
+            throw err;
+        }
     }
 
 // Find item by Id
     async findItemById (ItemId: number) {
-        const pItem = this.prisma.portfolio.findFirst({
-            where:{
-                id: ItemId,
-            }
-        })
 
-        return pItem;
+        try{
+            const pItem = this.prisma.portfolio.findFirst({
+                where:{
+                    id: ItemId,
+                }
+            })
+    
+            return pItem;
+        }
+        catch(err){
+            throw err;
+        }
     }
 
 //Update by Id
