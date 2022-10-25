@@ -9,19 +9,17 @@ export class PortfolioService {
 // Add item to portfolio
     async createItem(dto: CreatePortfolioItemDto){
         try{
-            const portfolioItem = await this.prisma.portfolio.create({
+            return await this.prisma.portfolio.create({
                 data: {
                     title: dto.title,
                     desc: dto.desc
                 }
             });
-    
-            return portfolioItem;   
 
         } 
         
         catch(err){
-            throw err;
+           console.log("DB error: ", err);
         }
     }
 
@@ -31,7 +29,7 @@ export class PortfolioService {
             return this.prisma.portfolio.findMany({})
         }
         catch(err) {
-            throw err;
+           console.log("DB error: ", err);
         }
     }
 
@@ -39,16 +37,14 @@ export class PortfolioService {
     async findItemById (ItemId: number) {
 
         try{
-            const pItem = this.prisma.portfolio.findFirst({
+            return this.prisma.portfolio.findFirst({
                 where:{
                     id: ItemId,
                 }
             })
-    
-            return pItem;
         }
         catch(err){
-            throw err;
+            console.log("DB error: ", err);
         }
     }
 
